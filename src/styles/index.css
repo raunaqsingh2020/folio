@@ -1,0 +1,63 @@
+/* Import Vollkorn Font Family */
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;500;600;700&display=swap');
+
+/* Import Reem Kufi Font Family */
+@import url('https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap');
+
+/* Import Federo Font Family */
+@import url('https://fonts.googleapis.com/css2?family=Federo&display=swap');
+
+/* Import Bogart Font Family */
+@font-face {
+    font-family: 'bogart';
+    src: url("fonts/bogart/Bogart-Regular-trial.ttf");
+}
+@font-face {
+    font-family: 'bogart-semibold';
+    src: url("fonts/bogart/Bogart-Semibold-trial.ttf");
+}
+
+@font-face {
+    font-family: 'knockout';
+    src: url("fonts/Knockout.woff2");
+}
+
+@font-face {
+    font-family: 'sangbleu';
+    src: url("fonts/SangBleu.woff2");
+}
+
+@font-face {
+    font-family: 'sansweb';
+    src: url("fonts/SansWeb.woff2");
+}
+
+@font-face {
+    font-family: 'danube';
+    src: url("fonts/Danube.ttf");
+}
+
+
+html {
+    scroll-behavior: smooth;
+    background: var(--background);
+    overscroll-behavior: none;
+    overflow: scroll;
+    overflow-x: hidden;
+    transition: background 0.4s ease-out;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+/* .curtains-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    pointer-events: none;
+  } */
