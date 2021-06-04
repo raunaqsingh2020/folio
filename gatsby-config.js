@@ -3,8 +3,9 @@ module.exports = {
     title: `Raunaq Singh | Creative Developer`,
     description: `Creative developer, design aficionado, abstract thinker.`,
     titleTemplate: "%s | Raunaq Singh",
-    url: "https://www.raunaq.is",
+    url: "https://raunaqsingh2020.github.io/folio",
     image: "/images/banner.png",
+    pathPrefix: "/folio",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

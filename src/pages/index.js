@@ -13,12 +13,7 @@ import { GlobalStyle } from '@styles';
 const IndexPage = () => {
   return (
     <>
-      
         <Header/>
-        <Header/>
-        <Header/>
-        <Header/>
-      
     </>
   )
 }
