@@ -7,6 +7,14 @@
 /* Import Federo Font Family */
 @import url('https://fonts.googleapis.com/css2?family=Federo&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Days+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
 /* Import Bogart Font Family */
 @font-face {
     font-family: 'bogart';

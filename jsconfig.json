@@ -6,6 +6,7 @@
         "@images": ["src/images"],
         "@pages": ["src/pages"],
         "@styles": ["src/styles"],
+        "@models": ["src/models"],
       },
     },
     "exclude": ["node_modules"],

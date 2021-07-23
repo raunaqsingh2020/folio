@@ -1,10 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
-import { ThemeProvider, NavBar, SEO, Fluid } from "@components"
+import { ThemeProvider, NavBar, SEO, Fluid, SideBar, ScrollIndicator } from "@components"
 import { GlobalStyle } from "@styles"
 import { Fade } from "react-awesome-reveal";
 import { Curtains } from 'react-curtains';
+
+import styled from "styled-components"
+import { media } from '@styles';
+
 
 // const variants = {
 //   initial: {
@@ -23,6 +27,11 @@ import { Curtains } from 'react-curtains';
 //     transition: { duration: 0.5 },
 //   },
 // };
+
+const Container = styled.header`
+  padding-left: 10rem;
+  ${media.desktop`padding-left: 0rem`};
+`
 
 const Layout = ({ children, location }) => {
   return (
@@ -44,16 +53,12 @@ const Layout = ({ children, location }) => {
           <ThemeProvider>
             <GlobalStyle />
                 <>
-                  {/* <Fade triggerOnce duration={1500} style={{ zIndex: 2000 }}> */}
-                    <NavBar/> 
-                  {/* </Fade> */}
-                  {/* <Curtains
-                    pixelRatio={Math.min(1.5, window.devicePixelRatio)}
-                  >
-                    <Fluid> */}
-                    {children}
-                    {/* </Fluid>
-                  </Curtains> */}
+                    <Container>
+                      <NavBar/>
+                      <SideBar/>
+                      <ScrollIndicator/>
+                      {children}
+                    </Container>
                 </>
           </ThemeProvider>
         </>

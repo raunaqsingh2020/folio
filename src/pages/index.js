@@ -1,19 +1,51 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
+import styled from 'styled-components'
 
 import { motion } from "framer-motion"
 import { Fade, AttentionSeeker, Zoom } from "react-awesome-reveal";
 
-import NavBar from "../components/navbar"
+import Scene from "@components/3DHeader/Scene1"
 
-import { ThemeProvider, Header, Layout, Fluid } from '@components';
-import { GlobalStyle } from '@styles';
+import { AboutMe, Header, Layout, Fluid, Loading, Cube, ThemeContext } from '@components';
+
+import { Canvas, useFrame } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import { useProgress, Html } from '@react-three/drei'
+
+const SceneContainer = styled.div`
+  height: 100vh;
+`
+
+function Loader() {
+  const { progress } = useProgress()
+  return (
+    <Html center>
+      <span style={{ color: '#FFFFFF' }}>{progress} % loaded</span>
+    </Html>
+  )
+}
 
 const IndexPage = () => {
+
+  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
+  const { colorMode, setColorMode } = React.useContext(ThemeContext)
+
+  //concurrent shadowMap
+
   return (
     <>
-        <Header/>
+        <SceneContainer>
+          <Canvas camera={{ position: [0, 0, 8], fov: 70 }}>
+            {/* <color attach="background" args={['#000']} /> */}
+            <Suspense fallback={<Loader />}>
+              <Scene theme={colorMode}/>
+            </Suspense>
+            <ambientLight intensity={0.4} />
+          </Canvas>
+        </SceneContainer>
+        <AboutMe/>
     </>
   )
 }

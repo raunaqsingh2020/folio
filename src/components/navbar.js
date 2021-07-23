@@ -4,7 +4,9 @@ import { Link } from "gatsby"
 import { motion, useViewportScroll, useTransform } from "framer-motion"
 
 import { ThemeContext, Toggle } from "./"
-import { FEDERO, REEM_KUFI, DANUBE } from "../styles/font"
+import { FEDERO, REEM_KUFI, DANUBE, BOGART_SEMIBOLD, KNOCKOUT } from "../styles/font"
+
+import { media } from "@styles"
 
 const Container = styled.header`
   position: fixed;
@@ -27,10 +29,10 @@ export const NameWrapper = styled(Link)`
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 0.75rem;
-  line-height 0.75rem;
+  font-size: 0.85rem;
+  line-height 0.85rem;
   color: var(--text);
-  ${DANUBE}
+  ${REEM_KUFI}
 `
 
 export const MenuWrapper = styled(Link)`
@@ -42,10 +44,12 @@ export const MenuWrapper = styled(Link)`
   font-size: 0.85rem;
   line-height 0.85rem;
   color: var(--text);
-  ${REEM_KUFI}
+  opacity: 0;
+  ${KNOCKOUT}
   &:hover {
     color: var(--text);
   }
+  ${media.desktop`opacity: 1`};
 `
 
 export const ThemeWrapper = styled(Link)`

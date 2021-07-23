@@ -37,3 +37,33 @@ export const DANUBE = `
   font-family: 'Danube', sans-serif;
   font-weight: 400;
 `
+
+export const JOSEFIN_SANS = `
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+`
+
+export const DAYS_ONE = `
+  font-family: 'Days One', sans-serif;
+  font-weight: 400;
+`
+
+export const SPACE_LIGHT = `
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 300;
+`
+
+export const SPACE_REGULAR = `
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 400;
+`
+
+export const LATO_LIGHT = `
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+`
+
+export const LATO_REGULAR = `
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+`
