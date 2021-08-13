@@ -53,8 +53,8 @@ const IndexPage = () => {
         setPosition("sticky");
         setTop(0);
       }
-      console.log(e.target.documentElement.scrollTop);
-      console.log(window.innerHeight);
+      // console.log(e.target.documentElement.scrollTop);
+      // console.log(window.innerHeight);
 
 
       //var header = document.querySelector('.3D-Header');

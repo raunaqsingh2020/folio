@@ -31,8 +31,8 @@ function Title({ layers, ...props }) {
 
   const textRef = useLayers(layers)
   const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
-  const { viewport } = useThree()
-  var fontSize = 4.5;//Math.min(viewport.height/1.35, viewport.width/1.35)
+  const { size } = useThree()
+  var fontSize = Math.min(size.height/145, size.width/145)
 
   return (
     <group {...props} ref={group}>
@@ -51,8 +51,8 @@ function TitleCopy({ layers, text, ...props }) {
 
   const textRef = useLayers(layers)
   const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
-  const { viewport } = useThree()
-  var fontSize = 4.5;//Math.min(viewport.height/1.35, viewport.width/1.35)
+  const { size } = useThree()
+  var fontSize = Math.min(size.height/145, size.width/145)
 
   return (
     <group {...props} ref={group}>
@@ -183,10 +183,11 @@ function Scene({ theme }) {
 
     const { x, y } = camera.position;
 
-    camera.position.lerp(new THREE.Vector3(x, y, 5-scrollY.current/3), 1);
+    //camera.position.lerp(new THREE.Vector3(x, y, 5-scrollY.current/3), 1);
+    camera.position.lerp(new THREE.Vector3(x, y, 5-winScroll/200), 1);
 
     // console.log(
-    //   `winScroll : ${winScroll},\nheight : ${height},\nscrolled : ${scrolled},\nposition.z : ${camera.position.z}`
+    //   `winScroll : ${winScroll},\nposition.z : ${camera.position.z}`
     // );
 
   };
@@ -205,7 +206,6 @@ function Scene({ theme }) {
           {theme === "light" ? (
             <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={1} color="#CCC"/>
           ) : (
-            // <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={1} color="#000"/>
             <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={0.3} color="#FFFFFF"/>
           )}
         </Octahedron>
