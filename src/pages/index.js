@@ -102,7 +102,7 @@ const IndexPage = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
+  //const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
   const { colorMode, setColorMode } = React.useContext(ThemeContext)
 
   return (
