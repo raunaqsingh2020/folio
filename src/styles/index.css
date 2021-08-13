@@ -45,6 +45,10 @@
     src: url("fonts/Danube.ttf");
 }
 
+@font-face {
+    font-family: 'northcarossela';
+    src: url("fonts/North-Carossela.otf");
+}
 
 html {
     scroll-behavior: smooth;
@@ -53,6 +57,13 @@ html {
     overflow: scroll;
     overflow-x: hidden;
     transition: background 0.4s ease-out;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
 
 ::-webkit-scrollbar {

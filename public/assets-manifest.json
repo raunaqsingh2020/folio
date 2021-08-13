@@ -1,4 +1,9 @@
 {
   "main.js": "render-page.js",
-  "render-page.js.map": "render-page.js.map"
+  "render-page.js.map": "render-page.js.map",
+  "static/North-Carossela.otf": "static/North-Carossela-29df1782f6ad79e7b823fc1af8aaeb53.otf",
+  "static/outline.png": "static/outline-bc65cecde3600aa06e6a25d5434c1620.png",
+  "static/sample.jpg": "static/sample-35b2a28947bcdb5e234e87bc1d129362.jpg",
+  "static/sample2.jpg": "static/sample2-21266513881848138a71841e2a7a3aa1.jpg",
+  "static/withBackground.png": "static/withBackground-17f3c739d47d3784ecdecc1f8beb4e59.png"
 }

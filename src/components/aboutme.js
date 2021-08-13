@@ -19,7 +19,8 @@ import {
   DAYS_ONE,
   SPACE_LIGHT,
   SPACE_REGULAR,
-  LATO_REGULAR
+  LATO_REGULAR,
+  NORTH_CAROSSELA
 } from '../styles/font'
 
 const SectionWrapper = styled.div`
@@ -64,13 +65,14 @@ const Title = styled.h1`
   display: flex;
   align-items: center;
   overflow: hidden;
-  font-size: min(14vw, 180px);
-  height: min(12vw, 154px);
+  font-size: min(12vw, 154px);
+  height: min(12.7vw, 165px);
   margin: 0;
   color: var(--text);
   opacity: 0.84;
-  ${DAYS_ONE}
-  ${media.medium`font-size: max(14vw, 94px); height: max(12vw, 81px);`};
+  text-transform: uppercase;
+  ${NORTH_CAROSSELA}
+  ${media.medium`font-size: max(14vw, 94px); height: max(15vw, 100px);`};
 `
 
 const TitleWrapper = styled.div`
@@ -122,8 +124,8 @@ const Info = styled.p`
 
 const AboutMe = () => {
 
-  const line1 = "about"
-  const line2 = "me"
+  const line1 = "raunaq"
+  const line2 = "singh"
 
   const line = {
     hidden: { opacity: 1, margin: 0 },
@@ -172,23 +174,25 @@ const AboutMe = () => {
                 >
                     <Title>
                         {/* <Wave text={line1} iterations={1} delay={0.4} effect="verticalFadeIn" effectDirection="down" effectDuration={10} effectChange={0.5}/> */}
-                    {line1.split("").map((char, index) => {
+                    {/* {line1.split("").map((char, index) => {
                     return (
                         <motion.div key={char + "-" + index} variants={letter}>
                         {char}
                         </motion.div>
                     )
-                    })}
+                    })} */}
+                    {line1}
                     </Title>
                     
                     <Title>
-                    {line2.split("").map((char, index) => {
+                    {/* {line2.split("").map((char, index) => {
                     return (
                         <motion.div key={char + "-" + index} variants={letter}>
                         {char}
                         </motion.div>
                     )
-                    })}
+                    })} */}
+                    {line2}
                     </Title>
                 </motion.h1>
                 {/* </Fade> */}

@@ -9,28 +9,8 @@ import { Curtains } from 'react-curtains';
 import styled from "styled-components"
 import { media } from '@styles';
 
-
-// const variants = {
-//   initial: {
-//     opacity: 0,
-//   },
-//   enter: {
-//     opacity: 1,
-//     transition: {
-//       duration: 0.5,
-//       delay: 0.5,
-//       when: 'beforeChildren',
-//     },
-//   },
-//   exit: {
-//     opacity: 0,
-//     transition: { duration: 0.5 },
-//   },
-// };
-
-const Container = styled.header`
-  padding-left: 10rem;
-  ${media.desktop`padding-left: 0rem`};
+const Container = styled.div`
+  
 `
 
 const Layout = ({ children, location }) => {
@@ -54,8 +34,8 @@ const Layout = ({ children, location }) => {
             <GlobalStyle />
                 <>
                     <Container>
-                      <NavBar/>
-                      <SideBar/>
+                      {/* <NavBar/> */}
+                      {/* <SideBar/> */}
                       <ScrollIndicator/>
                       {children}
                     </Container>
@@ -66,9 +46,5 @@ const Layout = ({ children, location }) => {
     />
   );
 };
-
-// Layout.propTypes = {
-//   children: PropTypes.node.isRequired,
-// }
 
 export default Layout

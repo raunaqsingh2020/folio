@@ -31,8 +31,8 @@ export const SectionWrapper = styled(Link)`
   text-transform: lowercase;
   text-decoration: none;
   width: fit-content;
-  font-size: 0.95rem;
-  line-height 0.95rem;
+  font-size: 0.9rem;
+  line-height 0.9rem;
   color: var(--text);
   // background: #f00;
   margin-bottom: 15px;
@@ -50,8 +50,8 @@ const SideBar = () => {
     >
         <SectionWrapper to="/">skills</SectionWrapper>
         <SectionWrapper to="/">projects</SectionWrapper>
-        <SectionWrapper to="/">about</SectionWrapper>
-        <SectionWrapper to="/">contact</SectionWrapper>
+        <SectionWrapper to="/#about-me-section">about</SectionWrapper>
+        <SectionWrapper to="/#contact-section">contact</SectionWrapper>
     </Container>
   )
 }

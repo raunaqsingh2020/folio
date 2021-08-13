@@ -67,3 +67,8 @@ export const LATO_REGULAR = `
   font-family: 'Lato', sans-serif;
   font-weight: 400;
 `
+
+export const NORTH_CAROSSELA = `
+  font-family: 'northcarossela', sans-serif;
+  font-weight: 400;
+`

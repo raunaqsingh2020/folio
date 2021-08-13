@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Raunaq Singh | Creative Developer`,
+    title: `Raunaq Singh – Creative Developer & Designer`,
     description: `Creative developer, design aficionado, abstract thinker.`,
     titleTemplate: "%s | Raunaq Singh",
     url: "https://localhost:8000",
@@ -28,7 +28,7 @@ module.exports = {
         background_color: `#FFF2D8`,
         theme_color: `#FFF2D8`,
         display: `minimal-ui`,
-        icon: `src/images/icon6.png`,
+        icon: `src/images/icon.png`,
       },
     },
     `gatsby-plugin-gatsby-cloud`,
