@@ -30,7 +30,7 @@ function Title({ layers, ...props }) {
   }, [])
 
   const textRef = useLayers(layers)
-  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
+  const textColor = '#FFF'//getComputedStyle(document.documentElement).getPropertyValue('--text')
   const { size } = useThree()
   var fontSize = Math.min(size.height/145, size.width/145)
 
@@ -50,7 +50,7 @@ function TitleCopy({ layers, text, ...props }) {
   }, [])
 
   const textRef = useLayers(layers)
-  const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
+  const textColor = '#FFF'//getComputedStyle(document.documentElement).getPropertyValue('--text')
   const { size } = useThree()
   var fontSize = Math.min(size.height/145, size.width/145)
 
@@ -150,16 +150,10 @@ function TitleCopies({ layers }) {
   )
 }
 
-function equation(x, x1, y1, x2, y2) {
-  return ((y2 - y1) / (x2 - x1)) * (x - x1) + y1;
-}
-
 function Scene({ theme }) {
   const [cubeCamera, renderTarget] = useRenderTarget()
 
   const [matcapTexture] = useMatcapTexture('C8D1DC_575B62_818892_6E747B')
-
-  const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--mirrors')
 
   const { camera } = useThree();
   const [changed, setChanged] = useState(false);
@@ -203,11 +197,12 @@ function Scene({ theme }) {
     <>
       <group name="sceneContainer">
         <Octahedron layers={[11]} name="background" args={[20, 4, 4]} position={[0, 0, -5]}>
-          {theme === "light" ? (
+          {/* {theme === "light" ? (
             <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={1} color="#CCC"/>
           ) : (
             <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={0.3} color="#FFFFFF"/>
-          )}
+          )} */}
+          <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={0.3} color="#FFFFFF"/>
         </Octahedron>
         <cubeCamera
           layers={[11]}

@@ -36,7 +36,7 @@ const Layout = ({ children, location }) => {
                     <Container>
                       {/* <NavBar/> */}
                       {/* <SideBar/> */}
-                      <ScrollIndicator/>
+                      {/* <ScrollIndicator/> */}
                       {children}
                     </Container>
                 </>

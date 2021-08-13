@@ -16,12 +16,8 @@ export const COLORS = {
   },
   background: {
     light: '#FFFCF5',
-    dark: '#131313',
+    dark: '#0A0A0A',//'#131313',
   },
-  mirrors: {
-    light: '#A0F',
-    dark: '#000',
-  }
 };
   
 export const COLOR_MODE_KEY = 'color-mode';

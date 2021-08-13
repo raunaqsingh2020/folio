@@ -14,6 +14,9 @@ const Container = styled.header`
   left: 0;
   width: 100%;
   z-index: 999;
+  visibility: ${props => props.display || "hidden"};
+  opacity: ${props => props.opacity || 0};
+  transition: visibility 0.8s, opacity 1.2s;
 `
 
 const NavBarWrapper = styled.div`
@@ -26,7 +29,7 @@ const NavBarWrapper = styled.div`
 
 const SectionWrapper = styled.div`
   display: flex;
-  width: min(54vw, 500px);
+  width: min(45vw, 400px);
   margin-top: -4px;
   justify-content: space-between;
   align-items: center;
@@ -65,7 +68,7 @@ export const ThemeWrapper = styled(Link)`
   }
 `
 
-const NavBar = () => {
+const NavBar = ({ opacity, display }) => {
   const { colorMode, setColorMode } = React.useContext(ThemeContext)
 
   const { scrollYProgress } = useViewportScroll()
@@ -76,6 +79,8 @@ const NavBar = () => {
       data-scroll
       data-scroll-sticky
       data-scroll-target="#page_container"
+      opacity={opacity}
+      display={display}
     >
       <NavBarWrapper>
         
@@ -101,7 +106,7 @@ const NavBar = () => {
         <SectionWrapper>
           <SectionLink to="/">projects</SectionLink>
           <SectionLink to="/#about">about</SectionLink>
-          <SectionLink to="/">résumé</SectionLink>
+          {/* <SectionLink to="/">résumé</SectionLink> */}
           <SectionLink to="/#contact">contact</SectionLink>
         </SectionWrapper>
 
