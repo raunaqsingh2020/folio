@@ -1,4 +1,4 @@
-export { ThemeProvider, ThemeContext } from './ThemeContext';
+export { ThemeProvider, ThemeContext } from './themecontext';
 export { default as Header } from './header';
 export { default as AboutMe } from './aboutme';
 export { default as NavBar } from './navbar';
