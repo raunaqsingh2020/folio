@@ -4,6 +4,7 @@
   "description": "A simple starter to get up and developing quickly with Gatsby",
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "homepage": "https://raunaqsingh2020.github.io/folio/",
   "dependencies": {
     "@babel/preset-env": "^7.15.0",
     "@react-three/cannon": "^2.3.0",
