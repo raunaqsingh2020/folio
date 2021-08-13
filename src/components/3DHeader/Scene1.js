@@ -32,7 +32,7 @@ function Title({ layers, ...props }) {
   const textRef = useLayers(layers)
   const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
   const { viewport } = useThree()
-  var fontSize = Math.min(viewport.height/1.35, viewport.width/1.35)
+  var fontSize = 4.5;//Math.min(viewport.height/1.35, viewport.width/1.35)
 
   return (
     <group {...props} ref={group}>
@@ -52,7 +52,7 @@ function TitleCopy({ layers, text, ...props }) {
   const textRef = useLayers(layers)
   const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
   const { viewport } = useThree()
-  var fontSize = Math.min(viewport.height/1.35, viewport.width/1.35)
+  var fontSize = 4.5;//Math.min(viewport.height/1.35, viewport.width/1.35)
 
   return (
     <group {...props} ref={group}>
