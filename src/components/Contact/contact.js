@@ -21,7 +21,7 @@ const TitleWrapper = styled.div`
 const HollowTitle = styled.h1`
   display: flex;
   overflow: hidden;
-  font-size: 5vw;
+  font-size: 6.7vw;
   margin: 0;
   color: var(--text);
   -webkit-text-fill-color: transparent;
@@ -34,7 +34,7 @@ const HollowTitle = styled.h1`
 const SolidTitle = styled.h1`
   display: flex;
   overflow: hidden;
-  font-size: 5vw;
+  font-size: 6.7vw;
   margin: 0;
   color: var(--text);
   text-transform: uppercase;
@@ -47,15 +47,15 @@ const ContactText = styled.span`
     font-weight: 300;
     white-space: nowrap;
     color: var(--text);
-    font-size: 6vw;
+    font-size: 7.5vw;
     text-transform: uppercase;
     ${NORTH_CAROSSELA}
     &:before, after {
         content: '';
         position: absolute;
         width: 0%;
-        height: 0.25vw;
-        top: calc(0.2rem + 33%);
+        height: 0.3vw;
+        top: calc(0.2rem + 31%);
         // margin-top: -6px;
         background: var(--text);
         transition: width 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -102,8 +102,8 @@ const ContactLink = styled.a`
 const HoverReveal = styled.div`
     position: absolute;
     z-index: -1; //z-index: 0;
-    width: 220px;
-    height: 320px;
+    width: min(30vw, 260px);
+    height: min(42vw, 360px);
     top: 0;
     left: 0;
     pointer-events: none;

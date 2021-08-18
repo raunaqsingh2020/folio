@@ -1,6 +1,7 @@
 export { ThemeProvider, ThemeContext } from './themecontext';
-export { default as Intro } from './intro';
+export { default as Projects } from './projects';
 export { default as Header } from './header';
+export { default as Footer } from './footer';
 export { default as AboutMe } from './aboutme';
 export { default as NavBar } from './navbar';
 export { default as SideBar } from './sidebar';
@@ -10,4 +11,5 @@ export { default as Scroll } from './scroll';
 export { default as SEO } from './seo';
 export { default as ContactMenu } from './Contact/contact';
 export { default as ScrollIndicator } from './scrollindicator';
+export { default as ThreeDHeader } from './3DHeader/ThreeDHeader';
 export { Loading, Cube } from './cube';

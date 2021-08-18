@@ -4,9 +4,10 @@ import { Link } from "gatsby"
 import { motion, useViewportScroll, useTransform } from "framer-motion"
 
 import { ThemeContext, Toggle } from "./"
-import { NORTH_CAROSSELA, REEM_KUFI, DANUBE, BOGART_SEMIBOLD, KNOCKOUT } from "../styles/font"
+import { NORTH_CAROSSELA, REEM_KUFI, DANUBE, BOGART_SEMIBOLD, POPPINS_LIGHT, POPPINS_MEDIUM } from "../styles/font"
 
 import { media } from "@styles"
+import { NoToneMapping } from "three"
 
 const Container = styled.header`
   position: fixed;
@@ -15,13 +16,15 @@ const Container = styled.header`
   width: 100%;
   z-index: 999;
   visibility: ${props => props.display || "hidden"};
-  opacity: ${props => props.opacity || 0};
-  transition: visibility 0.8s, opacity 1.2s;
+  // opacity: ${props => props.opacity || 0};
+  // transition: visibility 0.8s, opacity 0.8s;
+  mix-blend-mode: difference;
+  // background: #f00;
 `
 
 const NavBarWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   align-items: center;
   background-color: transparent;
   padding: 1rem 1rem 0rem 1rem;
@@ -29,32 +32,48 @@ const NavBarWrapper = styled.div`
 
 const SectionWrapper = styled.div`
   display: flex;
-  width: min(45vw, 400px);
-  margin-top: -4px;
+  width: 165px;
+  margin-top: -2px;
+  margin-left: 35px;
   justify-content: space-between;
   align-items: center;
   opacity: 1;
   transition: opacity 0.2s;
-  ${media.medium`opacity: 0;`};
+  ${media.phablet`opacity: 0;`};
 `
 
-export const SectionLink = styled(Link)`
+export const SectionLink = styled.text`
   text-align: center;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: 0.85rem;
-  line-height 0.85rem;
-  color: var(--text);
+  font-size: 0.75rem;
+  line-height 0.75rem;
+  color: white;//var(--text);
+  cursor: pointer;
   ${NORTH_CAROSSELA}
 `
 
+// export const SectionLink2 = styled(Link)`
+//   text-align: center;
+//   text-transform: uppercase;
+//   text-decoration: none;
+//   font-size: 0.75rem;
+//   line-height 0.75rem;
+//   color: white;//var(--text);
+//   cursor: pointer;
+//   ${NORTH_CAROSSELA}
+// `
+
 export const SVGFill = styled.g`
-  fill: var(--text);
+  fill: white;//var(--text);
 `
 
 export const ThemeWrapper = styled(Link)`
   display: block;
+  right: 0;
   margin-top: -0.5rem;
+  margin-left: auto;
+  margin-right: 0;
   z-index: 999;
   label {
     cursor: pointer;
@@ -72,7 +91,15 @@ const NavBar = ({ opacity, display }) => {
   const { colorMode, setColorMode } = React.useContext(ThemeContext)
 
   const { scrollYProgress } = useViewportScroll()
-  const rotation = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const rotation = useTransform(scrollYProgress, [0, 1], [0, 230])
+
+  const scrollToTop = () => {
+    window.scrollTo(0,0);
+  }
+
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId).scrollIntoView(true);
+  }
 
   return (
     <Container
@@ -84,7 +111,7 @@ const NavBar = ({ opacity, display }) => {
     >
       <NavBarWrapper>
         
-        <Link to="/">
+        <button onClick={scrollToTop} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
           <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
           width="15.0pt" height="12.3pt" viewBox="0 0 206.000000 169.000000"
           preserveAspectRatio="xMidYMid meet">
@@ -101,13 +128,13 @@ const NavBar = ({ opacity, display }) => {
               l-124 122 -479 -1 -479 0 -103 -130z"/>
             </SVGFill>
           </svg>
-        </Link>
+        </button>
 
         <SectionWrapper>
-          <SectionLink to="/">projects</SectionLink>
-          <SectionLink to="/#about">about</SectionLink>
-          {/* <SectionLink to="/">résumé</SectionLink> */}
-          <SectionLink to="/#contact">contact</SectionLink>
+          <SectionLink onClick={() => scrollToSection("projects")}>Projects</SectionLink>
+          <SectionLink onClick={() => scrollToSection("about")}>About</SectionLink>
+          {/* <SectionLink2 to="#contact">contact</SectionLink2> */}
+          <SectionLink onClick={() => scrollToSection("contact")}>Contact</SectionLink>
         </SectionWrapper>
 
           <ThemeWrapper>

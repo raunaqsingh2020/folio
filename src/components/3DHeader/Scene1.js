@@ -150,7 +150,10 @@ function TitleCopies({ layers }) {
   )
 }
 
-function Scene({ theme }) {
+function Scene() {
+
+  // console.log("scene active");
+
   const [cubeCamera, renderTarget] = useRenderTarget()
 
   const [matcapTexture] = useMatcapTexture('C8D1DC_575B62_818892_6E747B')
@@ -197,11 +200,6 @@ function Scene({ theme }) {
     <>
       <group name="sceneContainer">
         <Octahedron layers={[11]} name="background" args={[20, 4, 4]} position={[0, 0, -5]}>
-          {/* {theme === "light" ? (
-            <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={1} color="#CCC"/>
-          ) : (
-            <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={0.3} color="#FFFFFF"/>
-          )} */}
           <meshMatcapMaterial matcap={matcapTexture} side={THREE.BackSide} transparent opacity={0.3} color="#FFFFFF"/>
         </Octahedron>
         <cubeCamera

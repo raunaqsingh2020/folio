@@ -72,3 +72,13 @@ export const NORTH_CAROSSELA = `
   font-family: 'northcarossela', sans-serif;
   font-weight: 400;
 `
+
+export const POPPINS_LIGHT = `
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+`
+
+export const POPPINS_MEDIUM = `
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+`

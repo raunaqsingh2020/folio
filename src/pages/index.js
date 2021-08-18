@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useEffect, useState } from 'react'
+import React, { Suspense, useRef, useEffect, useState, useLayoutEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
@@ -6,24 +6,54 @@ import styled from 'styled-components'
 import { motion } from "framer-motion"
 import { Fade, AttentionSeeker, Zoom } from "react-awesome-reveal";
 
-import Scene from "@components/3DHeader/Scene1"
+import Scene1 from "@components/3DHeader/Scene1"
 
-import { Scroll, NavBar, Intro, AboutMe, Header, Layout, Loading, Cube, ThemeContext, ContactMenu, ScrollIndicator } from '@components';
+import { Scroll, NavBar, Projects, AboutMe, Header, Layout, Loading, Cube, ThemeContext, ContactMenu, ScrollIndicator, ThreeDHeader, Footer } from '@components';
+import { NORTH_CAROSSELA } from '@styles/font'
 
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { useProgress, Html } from '@react-three/drei'
 
+import { Controller, Scene } from 'react-scrollmagic';
+import { Tween, Timeline } from 'react-gsap';
+
 const SceneContainer = styled.div`
   height: 100vh;
   width: 100vw;
-  position: ${props => props.position || "sticky"};
+  //position: ${props => props.position || "sticky"};
+  //top: ${props => props.top || 0};
+  left: 0;
+  z-index: 5000;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 4px;
+`
+
+const HeaderWrapper = styled.div`
+  background-color: #000;
+`
+
+
+const ProjectsContainer = styled.div`
+  width: 100vw;
+  position: ${props => props.position || "fixed"};
   top: ${props => props.top || 0};
   left: 0;
 `
 
+const ScrollText = styled.text`
+  font-size: max(1vw, 0.8rem);
+  color: white;
+  background: transparent;
+  text-transform: uppercase;
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 6000;
+  ${NORTH_CAROSSELA}
+`
+
 const Spacer = styled.div`
-  height: ${props => props.top || 0};
+  height: ${props => props.height || 0};
 `
 
 function Loader() {
@@ -37,81 +67,91 @@ function Loader() {
 
 const IndexPage = () => {
 
-  const [position, setPosition] = useState("fixed")
-  const [top, setTop] = useState(0)
+  const headerRef = useRef();
+  const projectsRef = useRef();
 
-  const [navOpacity, setNavOpacity] = useState(0)
-  const [navDisplay, setNavDisplay] = useState("none")
   const [scrollIndicatorOpacity, setScrollIndicatorOpacity] = useState(0)
 
+  const [projectsPosition, setProjectsPosition] = useState("fixed")
+  const [projectsTop, setProjectsTop] = useState(0)
+
   const [overlayOpacity, setOverlayOpacity] = useState(1)
+  const [overlayDisplay, setOverlayDisplay] = useState("block")
 
-  useEffect(() => {
-    const onScroll = e => {
-      //var scrolled = e.target.documentElement.scrollTop;
-      var scroll = window.scrollY;
-      if (scroll > 2900) {
-        setPosition("relative");
-        setTop('2900px');
-      } else {
-        setPosition("sticky");
-        setTop(0);
-      }
+  const [navDisplay, setNavDisplay] = useState("none")
 
-      var overlay = (2900 + window.innerHeight - scroll) / window.innerHeight;
-      if (overlay >= 0) {
-        setOverlayOpacity(overlay);
-      } else {
-        setOverlayOpacity(0);
-      }
+  const onScroll = e => {
+    const header = headerRef.current.getBoundingClientRect();
+    const projects = projectsRef.current.getBoundingClientRect();
 
-      if (scroll > 3635) {
-        setNavOpacity(1);
-        setNavDisplay("visible");
-        setScrollIndicatorOpacity(1);
-      } else {
-        setNavOpacity(0);
-        setNavDisplay("hidden");
-        setScrollIndicatorOpacity(0);
-      }
+    if (header.bottom >= -100 || projects.bottom >= -100) {
+      requestAnimationFrame(updatePositions);
+    }
+  };
 
-    };
+  function updatePositions() {
+    
+    var scroll = window.scrollY;
+    var overlay = (2900 + window.innerHeight - scroll) / window.innerHeight;
 
-    window.addEventListener("scroll", onScroll);
+    if (overlay >= 0) {
+      setOverlayOpacity(overlay);
+    } else {
+      setOverlayOpacity(0);
+    }
 
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const headerBounds = headerRef.current.getBoundingClientRect();
+    const projectsBounds = projectsRef.current.getBoundingClientRect();
 
-  //const textColor = getComputedStyle(document.documentElement).getPropertyValue('--text')
-  const { colorMode, setColorMode } = React.useContext(ThemeContext)
+    if (headerBounds.bottom <= 100) {
+      setNavDisplay("visible");
+    } else {
+      setNavDisplay("hidden");
+    }
+
+    if (headerBounds.bottom <= 0) {
+      setOverlayDisplay("none");
+      setScrollIndicatorOpacity(1);
+      setProjectsPosition("relative");
+      setProjectsTop('0')
+    } else {
+      setOverlayDisplay("block");
+      setScrollIndicatorOpacity(0);
+      setProjectsPosition("fixed");
+      setProjectsTop(projectsBounds.height.toString() + 'px')
+    }
+  }
+
+  useLayoutEffect(() => {
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <>
-        <SceneContainer position={position} top={top}>
-          <Canvas camera={{ position: [0, 0, 5], fov: 70 }}>
-            <color attach="background" args={['#0A0A0A']}/>
-            <Suspense fallback={<Loader/>}>
-              <Scene theme={colorMode}/>
-            </Suspense>
-            <ambientLight intensity={0.6} color={'#FFF'} />
-          </Canvas>
-        </SceneContainer>
+        <HeaderWrapper>
+          <ThreeDHeader sceneRef={headerRef}/>
+        </HeaderWrapper>
 
-        <NavBar opacity={navOpacity} display={navDisplay}/>
+        {/* <ScrollText>SCROLL</ScrollText> */}
+
+        <NavBar display={navDisplay}/>
         <ScrollIndicator opacity={scrollIndicatorOpacity}/>
 
-        <Spacer top={'2900px'}/>
+        {/* <Spacer height={"2000px"}/> */}
 
-        {/* <Header/> */}
+        <div id="projects"/>
+        <ProjectsContainer ref={projectsRef} position={projectsPosition}>
+          <Projects overlayOpacity={overlayOpacity} display={overlayDisplay}/>
+        </ProjectsContainer>
 
-        <Intro overlayOpacity={overlayOpacity}/>
+        <Spacer height={projectsTop}/>
 
         <div id="about"/>
         <AboutMe/>
         <div id="contact"/>
         <ContactMenu/>
-
-        <Spacer/>
+        <Footer/>
     </>
   )
 }

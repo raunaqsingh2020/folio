@@ -14,13 +14,8 @@ import outline from '@images/outline.png';
 import withBackground from '@images/withBackground.png';
 
 import {
-  SANGBLEU,
-  BOGART_SEMIBOLD,
-  DAYS_ONE,
-  SPACE_LIGHT,
-  SPACE_REGULAR,
-  LATO_REGULAR,
-  NORTH_CAROSSELA
+  NORTH_CAROSSELA,
+  POPPINS_LIGHT
 } from '../styles/font'
 
 const SectionWrapper = styled.div`
@@ -49,7 +44,7 @@ const Headshot = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 200;
   opacity: 0;
   background-image: url(${outline});
   background-repeat: no-repeat;
@@ -65,8 +60,7 @@ const Title = styled.h1`
   display: flex;
   align-items: center;
   overflow: hidden;
-  font-size: min(12vw, 154px);
-  height: min(12.7vw, 165px);
+  font-size: max(10.5vw, 6rem);
   margin: 0;
   color: var(--text);
   opacity: 0.84;
@@ -77,10 +71,10 @@ const Title = styled.h1`
 
 const TitleWrapper = styled.div`
   position: absolute;
-  left: -6.2vw;
-  top: 3vw;
+  left: -8.2vw;
+  top: 17vw;
   z-index: 100;
-  ${media.medium`margin: auto; width: fit-content; height: fit-content; left: 0; top: -3.5vw; bottom: 0; right: 0;`};
+  ${media.medium`margin: auto; width: fit-content; height: fit-content; left: -17vw; top: -3.5vw; bottom: 0; right: 0;`};
 `
 
 const TitleSection = styled.div`
@@ -113,18 +107,16 @@ const InfoWrapper = styled.div`
 `
 
 const Info = styled.p`
-  font-size: min(2.2vw, 24px);
+  font-size: max(1.2vw, 0.8rem);
   margin: 0;
   color: var(--text);
   white-space: pre-wrap;
-  ${media.giant`font-size: min(2.2vw, 18px);`};
-  ${media.medium`font-size: max(2.2vw, 14px);`};
-  ${SPACE_LIGHT}
+  ${POPPINS_LIGHT}
 `
 
 const AboutMe = () => {
 
-  const line1 = "raunaq"
+  const line1 = "about"
   const line2 = "singh"
 
   const line = {
@@ -166,13 +158,14 @@ const AboutMe = () => {
             <BackgroundImage/>
             <Headshot/>
             <TitleWrapper>
+                <Title>ABOUT</Title>
                 {/* <Fade duration={2000} triggerOnce> */}
-                <motion.h1
+                {/* <motion.h1
                     variants={line}
                     initial="hidden"
                     animate="visible"
-                >
-                    <Title>
+                > */}
+                    {/* <Title> */}
                         {/* <Wave text={line1} iterations={1} delay={0.4} effect="verticalFadeIn" effectDirection="down" effectDuration={10} effectChange={0.5}/> */}
                     {/* {line1.split("").map((char, index) => {
                     return (
@@ -181,10 +174,10 @@ const AboutMe = () => {
                         </motion.div>
                     )
                     })} */}
-                    {line1}
-                    </Title>
+                    {/* {line1}
+                    </Title> */}
                     
-                    <Title>
+                    {/* <Title> */}
                     {/* {line2.split("").map((char, index) => {
                     return (
                         <motion.div key={char + "-" + index} variants={letter}>
@@ -192,9 +185,9 @@ const AboutMe = () => {
                         </motion.div>
                     )
                     })} */}
-                    {line2}
-                    </Title>
-                </motion.h1>
+                    {/* {line2}
+                    </Title> */}
+                {/* </motion.h1> */}
                 {/* </Fade> */}
             </TitleWrapper>
         </TitleSection>
