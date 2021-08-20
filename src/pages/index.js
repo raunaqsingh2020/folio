@@ -8,7 +8,7 @@ import { Fade, AttentionSeeker, Zoom } from "react-awesome-reveal";
 
 import Scene1 from "@components/3DHeader/Scene1"
 
-import { Scroll, NavBar, Projects, AboutMe, Header, Layout, Loading, Cube, ThemeContext, ContactMenu, ScrollIndicator, ThreeDHeader, Footer } from '@components';
+import { Loading, NavBar, Projects, AboutMe, Header, Layout, ThemeContext, ContactMenu, ScrollIndicator, ThreeDHeader, Footer } from '@components';
 import { NORTH_CAROSSELA } from '@styles/font'
 
 import { Canvas, useFrame } from '@react-three/fiber'
@@ -17,16 +17,6 @@ import { useProgress, Html } from '@react-three/drei'
 
 import { Controller, Scene } from 'react-scrollmagic';
 import { Tween, Timeline } from 'react-gsap';
-
-const SceneContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  //position: ${props => props.position || "sticky"};
-  //top: ${props => props.top || 0};
-  left: 0;
-  z-index: 5000;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 4px;
-`
 
 const HeaderWrapper = styled.div`
   background-color: #000;
@@ -67,6 +57,8 @@ function Loader() {
 
 const IndexPage = () => {
 
+  const [isLoading, setIsLoading] = useState(true)
+
   const headerRef = useRef();
   const projectsRef = useRef();
 
@@ -90,7 +82,7 @@ const IndexPage = () => {
   };
 
   function updatePositions() {
-    
+
     var scroll = window.scrollY;
     var overlay = (2900 + window.innerHeight - scroll) / window.innerHeight;
 
@@ -127,31 +119,41 @@ const IndexPage = () => {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(()=>  {
+    if ("scrollRestoration" in window.history) {
+        window.history.scrollRestoration = "manual"
+      }
+  },[]);
+
   return (
     <>
-        <HeaderWrapper>
-          <ThreeDHeader sceneRef={headerRef}/>
-        </HeaderWrapper>
+      {isLoading &&
+        <Loading setIsLoading={setIsLoading} />
+      }
 
-        {/* <ScrollText>SCROLL</ScrollText> */}
+      <HeaderWrapper>
+        <ThreeDHeader sceneRef={headerRef} />
+      </HeaderWrapper>
 
-        <NavBar display={navDisplay}/>
-        <ScrollIndicator opacity={scrollIndicatorOpacity}/>
+      {/* <ScrollText>SCROLL</ScrollText> */}
 
-        {/* <Spacer height={"2000px"}/> */}
+      <NavBar display={navDisplay} />
+      <ScrollIndicator opacity={scrollIndicatorOpacity} />
 
-        <div id="projects"/>
-        <ProjectsContainer ref={projectsRef} position={projectsPosition}>
-          <Projects overlayOpacity={overlayOpacity} display={overlayDisplay}/>
-        </ProjectsContainer>
+      {/* <Spacer height={"2000px"}/> */}
 
-        <Spacer height={projectsTop}/>
+      <div id="projects" />
+      <ProjectsContainer ref={projectsRef} position={projectsPosition}>
+        <Projects overlayOpacity={overlayOpacity} display={overlayDisplay} />
+      </ProjectsContainer>
 
-        <div id="about"/>
-        <AboutMe/>
-        <div id="contact"/>
-        <ContactMenu/>
-        <Footer/>
+      <Spacer height={projectsTop} />
+
+      <div id="about" />
+      <AboutMe />
+      <div id="contact" />
+      <ContactMenu />
+      <Footer />
     </>
   )
 }

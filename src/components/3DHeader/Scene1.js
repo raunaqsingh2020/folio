@@ -190,7 +190,11 @@ function Scene() {
   };
 
   useEffect(() => {
-    window.addEventListener("wheel", scroll);
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      
+    } else {
+      window.addEventListener("wheel", scroll);
+    }
     return () => {
       window.removeEventListener("wheel", scroll);
     };

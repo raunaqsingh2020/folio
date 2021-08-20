@@ -12,16 +12,12 @@ import { NORTH_CAROSSELA } from "../../styles/font"
 const StickyWrapper = styled.div`
   overflow: hidden;
   .sticky {
-    background: black;
+    background: #0A0A0A;
     width: 100%;
     height: 100vh;
     z-index: 5000;
   }
   box-shadow: rgba(var(--rgbShadow), 0.4) 0px 0px 10px 4px;
-  // padding: 0;
-  // margin: 0;
-  // background: #F00;
-  // border-bottom: 5px solid yellow;
   z-index: 5000;
 `;
 
@@ -31,7 +27,6 @@ const SceneContainer = styled.div`
   position: absolute;
   padding: 0;
   margin: 0;
-  // box-shadow: rgba(0, 0, 0, 0.28) 0px 0px 3px 3px;
 `
 
 const Temp = styled.div`
@@ -50,9 +45,15 @@ function Loader() {
   const { progress } = useProgress()
   return (
     <Html center>
-      <span style={{ color: '#FFFFFF' }}>{progress} % loaded</span>
+      {/* <span style={{ color: '#FFFFFF' }}>{progress} % loaded</span> */}
+      <span>LOADING</span>
     </Html>
   )
+}
+
+const headerScrollDuration = 2900;
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    headerScrollDuration = 0;
 }
 
 // const ThreeDHeader = ({ sceneRef }) => (
@@ -121,7 +122,7 @@ const ThreeDHeader = ({ sceneRef }) => (
       <div>
         <Scene
           triggerHook="onLeave"
-          duration={2900}
+          duration={headerScrollDuration}
           pin
         >
           {(progress) => (

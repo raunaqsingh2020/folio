@@ -6,7 +6,9 @@ import gsap from 'gsap'
 import { Wave } from "react-animated-text";
 
 import { motion, useViewportScroll, useTransform } from "framer-motion"
-import { Fade, AttentionSeeker, Zoom } from "react-awesome-reveal";
+
+import Slide from 'react-reveal/Slide';
+import Fade from 'react-reveal/Fade';
 
 import { media } from "@styles"
 
@@ -23,6 +25,16 @@ const SectionWrapper = styled.div`
   display: flex;
   margin-top: 5rem;
   ${media.medium`flex-direction: column-reverse; height: fit-content`};
+`
+
+const OverflowWrapper = styled.div`
+  overflow: hidden;
+  height: min(43vw, 550px);
+  width: min(32vw, 410px);
+  position: absolute;
+  top: 0;
+  left: 0vw;
+  ${media.medium`margin: auto; top: 0; left: 0; bottom: 0; right: 0; width: max(32vw, 250px); height: max(43vw, 336px);`};
 `
 
 const BackgroundImage = styled.div`
@@ -111,6 +123,7 @@ const Info = styled.p`
   margin: 0;
   color: var(--text);
   white-space: pre-wrap;
+  overflow: hidden;
   ${POPPINS_LIGHT}
 `
 
@@ -149,46 +162,26 @@ const AboutMe = () => {
         <InfoSection>
             <InfoWrapper>
                 <Info> 
-                    Hi, I'm Raunaq...{'\n'}{'\n'}God's greatest gift to humanity. Truly, I am the best. {'\n'}{'\n'}Amazing. Incredible. Inspiring.
+                  <Fade bottom cascade>
+                    Hi, I'm Raunaq...{'\n'}God's greatest gift to humanity. Truly, I am the best.{'\n'}Amazing. Incredible. Inspiring.
+                  </Fade>
                 </Info>
             </InfoWrapper>
         </InfoSection>
 
         <TitleSection>
-            <BackgroundImage/>
+          <OverflowWrapper>
+            <Slide left>
+              <BackgroundImage/>
+            </Slide>
+            </OverflowWrapper>
             <Headshot/>
             <TitleWrapper>
-                <Title>ABOUT</Title>
-                {/* <Fade duration={2000} triggerOnce> */}
-                {/* <motion.h1
-                    variants={line}
-                    initial="hidden"
-                    animate="visible"
-                > */}
-                    {/* <Title> */}
-                        {/* <Wave text={line1} iterations={1} delay={0.4} effect="verticalFadeIn" effectDirection="down" effectDuration={10} effectChange={0.5}/> */}
-                    {/* {line1.split("").map((char, index) => {
-                    return (
-                        <motion.div key={char + "-" + index} variants={letter}>
-                        {char}
-                        </motion.div>
-                    )
-                    })} */}
-                    {/* {line1}
-                    </Title> */}
-                    
-                    {/* <Title> */}
-                    {/* {line2.split("").map((char, index) => {
-                    return (
-                        <motion.div key={char + "-" + index} variants={letter}>
-                        {char}
-                        </motion.div>
-                    )
-                    })} */}
-                    {/* {line2}
-                    </Title> */}
-                {/* </motion.h1> */}
-                {/* </Fade> */}
+                <Title>
+                  <Fade bottom cascade>
+                    ABOUT
+                  </Fade>
+                </Title>
             </TitleWrapper>
         </TitleSection>
     </SectionWrapper>

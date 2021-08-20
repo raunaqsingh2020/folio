@@ -3,9 +3,12 @@ import styled from 'styled-components'
 
 import gsap from 'gsap';
 
+import Slide from 'react-reveal/Slide';
+import Fade from 'react-reveal/Fade';
+
 import {
-  SPACE_REGULAR,
-  NORTH_CAROSSELA,
+    SPACE_REGULAR,
+    NORTH_CAROSSELA,
 } from '../../styles/font'
 
 import sampleImg from '@images/sample.jpg';
@@ -14,7 +17,6 @@ import sampleImg2 from '@images/sample2.jpg';
 import { map, lerp, clamp, getMousePos } from './utils';
 
 const TitleWrapper = styled.div`
-  width: 100%;
   padding: 3rem;
 `
 
@@ -28,6 +30,7 @@ const HollowTitle = styled.h1`
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: var(--text);
   text-transform: uppercase;
+  width: 100%; 
   ${NORTH_CAROSSELA}
 `
 
@@ -38,12 +41,15 @@ const SolidTitle = styled.h1`
   margin: 0;
   color: var(--text);
   text-transform: uppercase;
+  width: 100%; 
+  overflow: hidden;
   ${NORTH_CAROSSELA}
 `
 
 const ContactText = styled.span`
     position: relative;
     display: block;
+    overflow: hidden;
     font-weight: 300;
     white-space: nowrap;
     color: var(--text);
@@ -127,43 +133,43 @@ const HoverRevealImg = styled.div`
     //background-image: url(${sampleImg});
 `
 
-let mousepos = {x: 0, y: 0};
+let mousepos = { x: 0, y: 0 };
 let mousePosCache = mousepos;
-let direction = {x: mousePosCache.x-mousepos.x, y: mousePosCache.y-mousepos.y};
+let direction = { x: mousePosCache.x - mousepos.x, y: mousePosCache.y - mousepos.y };
 
 class ContactItem extends React.Component {
     //adapted from https://tympanus.net/codrops/2020/07/01/creating-a-menu-image-animation-on-hover/
 
-    constructor(props){
-      super(props);
+    constructor(props) {
+        super(props);
 
-      this.animatableProperties = props.animatableProperties;
-      this.image = props.image
+        this.animatableProperties = props.animatableProperties;
+        this.image = props.image
 
-      this.mouseEnter = this.mouseEnter.bind(this);
-      this.mouseLeave = this.mouseLeave.bind(this);
-      this.showImage = this.showImage.bind(this);
-      this.hideImage = this.hideImage.bind(this);
+        this.mouseEnter = this.mouseEnter.bind(this);
+        this.mouseLeave = this.mouseLeave.bind(this);
+        this.showImage = this.showImage.bind(this);
+        this.hideImage = this.hideImage.bind(this);
 
-      this.linkRef = React.createRef();
-      this.revealRef = React.createRef();
-      this.revealInnerRef = React.createRef();
-      this.revealImgRef = React.createRef();
+        this.linkRef = React.createRef();
+        this.revealRef = React.createRef();
+        this.revealInnerRef = React.createRef();
+        this.revealImgRef = React.createRef();
     }
-  
-    componentDidMount(){
+
+    componentDidMount() {
         this.revealImgRef.current.style.backgroundImage = `url(${this.image})`;
         window.addEventListener('mousemove', ev => mousepos = getMousePos(ev));
     }
 
-    mouseEnter(){
+    mouseEnter() {
         this.showImage();
         this.firstRAFCycle = true;
         //start the render loop animation (rAF)
         this.loopRender();
     }
 
-    mouseLeave(){
+    mouseLeave() {
         this.stopRendering();
         this.hideImage();
     }
@@ -192,28 +198,28 @@ class ContactItem extends React.Component {
         // kill any current tweens
         gsap.killTweensOf(this.revealInnerRef.current);
         gsap.killTweensOf(this.revealImgRef.current);
-        
+
         this.tl = gsap.timeline({
             onStart: () => {
                 // show the image element
                 //this.revealRef.current.style.opacity = 1;
-                gsap.to(this.revealRef.current, 0.3, {opacity: 1});
+                gsap.to(this.revealRef.current, 0.3, { opacity: 1 });
                 // set a high z-index value so image appears on top of other elements
-                gsap.set(this.linkRef.current, {zIndex: 5});
+                gsap.set(this.linkRef.current, { zIndex: 5 });
             }
         })
-        // animate the image wrap
-        .to(this.revealInnerRef.current, 0.2, {
-            ease: 'Sine.easeOut',
-            startAt: {x: direction.x < 0 ? '-100%' : '100%'},
-            x: '0%'
-        })
-        // animate the image element
-        .to(this.revealImgRef.current, 0.2, {
-            ease: 'Sine.easeOut',
-            startAt: {x: direction.x < 0 ? '100%': '-100%'},
-            x: '0%'
-        }, 0);
+            // animate the image wrap
+            .to(this.revealInnerRef.current, 0.2, {
+                ease: 'Sine.easeOut',
+                startAt: { x: direction.x < 0 ? '-100%' : '100%' },
+                x: '0%'
+            })
+            // animate the image element
+            .to(this.revealImgRef.current, 0.2, {
+                ease: 'Sine.easeOut',
+                startAt: { x: direction.x < 0 ? '100%' : '-100%' },
+                x: '0%'
+            }, 0);
     }
     // hide the image element
     hideImage() {
@@ -223,45 +229,45 @@ class ContactItem extends React.Component {
 
         this.tl = gsap.timeline({
             onStart: () => {
-                gsap.set(this.linkRef.current, {zIndex: 1});
+                gsap.set(this.linkRef.current, { zIndex: 1 });
             },
             onComplete: () => {
-                gsap.set(this.revealRef.current, {opacity: 0});
+                gsap.set(this.revealRef.current, { opacity: 0 });
             }
         })
-        .to(this.revealInnerRef.current, 0.2, {
-            ease: 'Sine.easeOut',
-            x: direction.x < 0 ? '100%' : '-100%'
-        })
-        .to(this.revealImgRef.current, 0.2, {
-            ease: 'Sine.easeOut',
-            x: direction.x < 0 ? '-100%' : '100%'
-        }, 0);
+            .to(this.revealInnerRef.current, 0.2, {
+                ease: 'Sine.easeOut',
+                x: direction.x < 0 ? '100%' : '-100%'
+            })
+            .to(this.revealImgRef.current, 0.2, {
+                ease: 'Sine.easeOut',
+                x: direction.x < 0 ? '-100%' : '100%'
+            }, 0);
     }
 
     animate() {
         this.requestId = undefined;
         // calculate position/sizes the first time
-        if ( this.firstRAFCycle ) {
+        if (this.firstRAFCycle) {
             this.calcBounds();
         }
 
         // calculate the mouse distance (current vs previous cycle)
         const mouseDistanceX = clamp(Math.abs(mousePosCache.x - mousepos.x), 0, 100);
         // direction where the mouse is moving
-        direction = {x: mousePosCache.x-mousepos.x, y: mousePosCache.y-mousepos.y};
+        direction = { x: mousePosCache.x - mousepos.x, y: mousePosCache.y - mousepos.y };
         // updated cache values
-        mousePosCache = {x: mousepos.x, y: mousepos.y};
+        mousePosCache = { x: mousepos.x, y: mousepos.y };
 
         // new translation values
         // the center of the image element is positioned where the mouse is
-        this.animatableProperties.tx.current = Math.abs(mousepos.x - this.bounds.el.left) - this.bounds.reveal.width/2;
-        this.animatableProperties.ty.current = Math.abs(mousepos.y - this.bounds.el.top) - this.bounds.reveal.height/2;// + this.bounds.el.height/2 - this.bounds.reveal.height/2;//Math.abs(mousepos.y - this.bounds.el.top) - this.bounds.reveal.height/2;
+        this.animatableProperties.tx.current = Math.abs(mousepos.x - this.bounds.el.left) - this.bounds.reveal.width / 2;
+        this.animatableProperties.ty.current = Math.abs(mousepos.y - this.bounds.el.top) - this.bounds.reveal.height / 2;// + this.bounds.el.height/2 - this.bounds.reveal.height/2;//Math.abs(mousepos.y - this.bounds.el.top) - this.bounds.reveal.height/2;
 
         // new rotation value
-        this.animatableProperties.rotation.current = this.firstRAFCycle ? 0 : map(mouseDistanceX,0,100,0,direction.x < 0 ? 60 : -60);
+        this.animatableProperties.rotation.current = this.firstRAFCycle ? 0 : map(mouseDistanceX, 0, 100, 0, direction.x < 0 ? 60 : -60);
         // new filter value
-        this.animatableProperties.brightness.current = this.firstRAFCycle ? 1 : map(mouseDistanceX,0,100,1,4);
+        this.animatableProperties.brightness.current = this.firstRAFCycle ? 1 : map(mouseDistanceX, 0, 100, 1, 4);
 
         // set up the interpolated values
         // for the first cycle, both the interpolated values need to be the same so there's no "lerped" animation between the previous and current state
@@ -269,7 +275,7 @@ class ContactItem extends React.Component {
         this.animatableProperties.ty.previous = this.firstRAFCycle ? this.animatableProperties.ty.current : lerp(this.animatableProperties.ty.previous, this.animatableProperties.ty.current, this.animatableProperties.ty.amt);
         this.animatableProperties.rotation.previous = this.firstRAFCycle ? this.animatableProperties.rotation.current : lerp(this.animatableProperties.rotation.previous, this.animatableProperties.rotation.current, this.animatableProperties.rotation.amt);
         this.animatableProperties.brightness.previous = this.firstRAFCycle ? this.animatableProperties.brightness.current : lerp(this.animatableProperties.brightness.previous, this.animatableProperties.brightness.current, this.animatableProperties.brightness.amt);
-        
+
         // set styles
         gsap.set(this.revealRef.current, {
             x: this.animatableProperties.tx.previous,
@@ -282,18 +288,22 @@ class ContactItem extends React.Component {
         this.firstRAFCycle = false;
         this.loopRender();
     }
-  
-    render(){
-      return (
-        <ContactLink ref={this.linkRef} href={this.props.url} target={"_blank"} spy={true} smooth={true} duration={5000} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
-            <ContactText>{this.props.title}</ContactText>
-            <HoverReveal ref={this.revealRef}>
-                <HoverRevealInner ref={this.revealInnerRef}>
-                    <HoverRevealImg ref={this.revealImgRef}/>
-                </HoverRevealInner>
-            </HoverReveal>
-        </ContactLink>
-      );;
+
+    render() {
+        return (
+            <ContactLink ref={this.linkRef} href={this.props.url} target={"_blank"} spy={true} smooth={true} duration={5000} onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave}>
+                <ContactText>
+                    <Fade bottom cascade delay={this.props.enterDelay}>
+                        {this.props.title}
+                    </Fade>
+                </ContactText>
+                <HoverReveal ref={this.revealRef}>
+                    <HoverRevealInner ref={this.revealInnerRef}>
+                        <HoverRevealImg ref={this.revealImgRef} />
+                    </HoverRevealInner>
+                </HoverReveal>
+            </ContactLink>
+        );;
     }
 }
 
@@ -301,24 +311,32 @@ class ContactItem extends React.Component {
 const Contact = () => {
 
     const animatableProperties = {
-        tx: {previous: 0, current: 0, amt: 0.08},
-        ty: {previous: 0, current: 0, amt: 0.08},
-        rotation: {previous: 0, current: 0, amt: 0.08},
-        brightness: {previous: 1, current: 1, amt: 0.08}
+        tx: { previous: 0, current: 0, amt: 0.08 },
+        ty: { previous: 0, current: 0, amt: 0.08 },
+        rotation: { previous: 0, current: 0, amt: 0.08 },
+        brightness: { previous: 1, current: 1, amt: 0.08 }
     };
 
     return (
-      <>
-        <TitleWrapper>
-            <HollowTitle>Don't be shy,</HollowTitle>
-            <SolidTitle>Make the first move.</SolidTitle>
-        </TitleWrapper>
-        <ContactItem title={'email'} image={sampleImg} url={"mailto: raunaq.singh@elativo.com"} animatableProperties={animatableProperties}/>
-        <ContactItem title={'github'} image={sampleImg2} url={"https://github.com/raunaqsingh2020"} animatableProperties={animatableProperties}/>
-        <ContactItem title={'linkedin'} image={sampleImg} url={"https://www.linkedin.com/in/raunaq-singh-2024/"} animatableProperties={animatableProperties}/>
-        <ContactItem title={'instagram'} image={sampleImg2} url={"https://www.instagram.com/raunaq.singh70/"} animatableProperties={animatableProperties}/>
-      </>
+        <>
+            <TitleWrapper>
+                <HollowTitle>
+                    <Fade bottom cascade fraction={1} delay={0}>
+                        Don't be shy,
+                    </Fade>
+                </HollowTitle>
+                <SolidTitle>
+                    <Fade bottom cascade fraction={1} delay={100}>
+                        Make the first move.
+                    </Fade>
+                </SolidTitle>
+            </TitleWrapper>
+            <ContactItem title={'email'} image={sampleImg} url={"mailto: raunaq.singh@elativo.com"} enterDelay={0} animatableProperties={animatableProperties} />
+            <ContactItem title={'github'} image={sampleImg2} url={"https://github.com/raunaqsingh2020"} enterDelay={50} animatableProperties={animatableProperties} />
+            <ContactItem title={'linkedin'} image={sampleImg} url={"https://www.linkedin.com/in/raunaq-singh-2024/"} enterDelay={100} animatableProperties={animatableProperties} />
+            <ContactItem title={'instagram'} image={sampleImg2} url={"https://www.instagram.com/raunaq.singh70/"} enterDelay={150} animatableProperties={animatableProperties} />
+        </>
     );
-  };
-  
+};
+
 export default Contact;

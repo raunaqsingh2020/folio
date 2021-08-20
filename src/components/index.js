@@ -1,4 +1,5 @@
 export { ThemeProvider, ThemeContext } from './themecontext';
+export { default as Loading } from './loading';
 export { default as Projects } from './projects';
 export { default as Header } from './header';
 export { default as Footer } from './footer';
@@ -12,4 +13,3 @@ export { default as SEO } from './seo';
 export { default as ContactMenu } from './Contact/contact';
 export { default as ScrollIndicator } from './scrollindicator';
 export { default as ThreeDHeader } from './3DHeader/ThreeDHeader';
-export { Loading, Cube } from './cube';
