@@ -3,6 +3,12 @@ import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Text, Box, useMatcapTexture, Octahedron } from '@react-three/drei'
 import { useTransform, useViewportScroll } from 'framer-motion';
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
 
 import useSlerp from './use-slerp'
 import useLayers from './use-layers'
@@ -190,9 +196,7 @@ function Scene() {
   };
 
   useEffect(() => {
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      
-    } else {
+    if (!isMobile) {
       window.addEventListener("wheel", scroll);
     }
     return () => {

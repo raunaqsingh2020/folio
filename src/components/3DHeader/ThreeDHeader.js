@@ -7,7 +7,12 @@ import Scene1 from "./Scene1"
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useProgress, Html } from '@react-three/drei'
 
-import { NORTH_CAROSSELA } from "../../styles/font"
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
 
 const StickyWrapper = styled.div`
   overflow: hidden;
@@ -29,18 +34,6 @@ const SceneContainer = styled.div`
   margin: 0;
 `
 
-const Temp = styled.div`
-  height: 340px;
-  width: 100vw;
-  //background-color: var(--background);
-  background-color: blue;
-  position: absolute;
-  // box-shadow: rgba(255, 255, 255, 0.14) 0px 1px;
-  // padding: 5rem;
-  // margin-bottom: 5rem;
-  // z-index: 300;
-`
-
 function Loader() {
   const { progress } = useProgress()
   return (
@@ -51,99 +44,50 @@ function Loader() {
   )
 }
 
-const headerScrollDuration = 2900;
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-    headerScrollDuration = 0;
-}
-
-// const ThreeDHeader = ({ sceneRef }) => (
-//   <StickyWrapper>
-//     <Controller>
-//       {/* <div> */}
-//         <Scene
-//           triggerHook="onLeave"
-//           duration={3470}
-//           pin
-//         >
-//           {(progress) => (
-//             <div className="sticky">
-//               <Temp>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//                   <span>HELLO</span><br/>
-//               </Temp>
-//               <Timeline totalProgress={progress} paused>
-//                 <Scene
-//                   triggerHook="onLeave"
-//                   offset={2920}
-//                   duration={550}
-//                   pin
-//                 >
-//                   {(progress2) => (
-//                     <Timeline totalProgress={progress2} paused>
-//                       <Tween
-//                         from={{ y: '0%' }}
-//                         to={{ y: '-100%' }}
-//                       >
-//                         <SceneContainer ref={sceneRef}>
-//                           <Canvas camera={{ position: [0, 0, 5], fov: 70 }}>
-//                             <color attach="background" args={['#000']} />
-//                             <Suspense fallback={<Loader/>}>
-//                               <Scene1 />
-//                             </Suspense>
-//                             <ambientLight intensity={0.6} color={'#FFF'} />
-//                           </Canvas>
-//                         </SceneContainer>
-//                       </Tween>
-//                     </Timeline>
-//                   )}
-//                 </Scene>
-//               </Timeline>
-//             </div>
-//           )}
-//         </Scene>
-//       {/* </div> */}
-//     </Controller>
-//   </StickyWrapper>
-// );
-
 const ThreeDHeader = ({ sceneRef }) => (
-  <StickyWrapper>
-    <Controller>
-      <div>
-        <Scene
-          triggerHook="onLeave"
-          duration={headerScrollDuration}
-          pin
-        >
-          {(progress) => (
-            <div className="sticky">
-              <Timeline totalProgress={progress} paused>
-                <SceneContainer ref={sceneRef}>
-                  <Canvas camera={{ position: [0, 0, 5], fov: 70 }}>
-                    <color attach="background" args={['#0A0A0A']} />
-                    <Suspense fallback={<Loader />}>
-                      <Scene1 />
-                    </Suspense>
-                    <ambientLight intensity={0.6} color={'#FFF'} />
-                  </Canvas>
-                </SceneContainer>
-              </Timeline>
-            </div>
-          )}
-        </Scene>
-      </div>
-    </Controller>
-  </StickyWrapper>
+  <>
+    <MobileView>
+      <SceneContainer ref={sceneRef}>
+        <Canvas camera={{ position: [0, 0, 5], fov: 70 }}>
+          <color attach="background" args={['#0A0A0A']} />
+          <Suspense fallback={<Loader />}>
+            <Scene1 />
+          </Suspense>
+          <ambientLight intensity={0.6} color={'#FFF'} />
+        </Canvas>
+      </SceneContainer>
+    </MobileView>
+
+    <BrowserView>
+      <StickyWrapper>
+        <Controller>
+          <div>
+            <Scene
+              triggerHook="onLeave"
+              duration={2900}
+              pin
+            >
+              {(progress) => (
+                <div className="sticky">
+                  <Timeline totalProgress={progress} paused>
+                    <SceneContainer ref={sceneRef}>
+                      <Canvas camera={{ position: [0, 0, 5], fov: 70 }}>
+                        <color attach="background" args={['#0A0A0A']} />
+                        <Suspense fallback={<Loader />}>
+                          <Scene1 />
+                        </Suspense>
+                        <ambientLight intensity={0.6} color={'#FFF'} />
+                      </Canvas>
+                    </SceneContainer>
+                  </Timeline>
+                </div>
+              )}
+            </Scene>
+          </div>
+        </Controller>
+      </StickyWrapper>
+    </BrowserView>
+  </>
 );
 
 export default ThreeDHeader;
