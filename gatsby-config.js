@@ -8,6 +8,7 @@ module.exports = {
     pathPrefix: "/folio",
   },
   plugins: [
+    `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {

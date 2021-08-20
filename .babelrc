@@ -1,5 +1,6 @@
 {
     "presets": [
       ["babel-preset-gatsby", { "targets": { "esmodules": true } }]
-    ]
+    ],
+    "plugins": ["babel-plugin-styled-components"]
   }
