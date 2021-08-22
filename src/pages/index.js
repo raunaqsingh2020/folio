@@ -6,6 +6,13 @@ import styled from 'styled-components'
 import { motion } from "framer-motion"
 import { Fade, AttentionSeeker, Zoom } from "react-awesome-reveal";
 
+import {
+  BrowserView,
+  MobileView,
+  isBrowser,
+  isMobile
+} from "react-device-detect";
+
 import Scene1 from "@components/3DHeader/Scene1"
 
 import { Loading, NavBar, Projects, AboutMe, Header, Layout, ThemeContext, ContactMenu, ScrollIndicator, ThreeDHeader, Footer } from '@components';
@@ -22,9 +29,9 @@ const HeaderWrapper = styled.div`
   background-color: #000;
 `
 
-
 const ProjectsContainer = styled.div`
   width: 100vw;
+  //position: ${props => props.position || "relative"};
   position: ${props => props.position || "fixed"};
   top: ${props => props.top || 0};
   left: 0;
@@ -46,15 +53,6 @@ const Spacer = styled.div`
   height: ${props => props.height || 0};
 `
 
-function Loader() {
-  const { progress } = useProgress()
-  return (
-    <Html center>
-      <span style={{ color: '#FFFFFF' }}>{progress} % loaded</span>
-    </Html>
-  )
-}
-
 const IndexPage = () => {
 
   const [isLoading, setIsLoading] = useState(true)
@@ -64,12 +62,15 @@ const IndexPage = () => {
 
   const [scrollIndicatorOpacity, setScrollIndicatorOpacity] = useState(0)
 
+  //const [projectsPosition, setProjectsPosition] = useState("relative")
   const [projectsPosition, setProjectsPosition] = useState("fixed")
   const [projectsTop, setProjectsTop] = useState(0)
 
-  const [overlayOpacity, setOverlayOpacity] = useState(1)
+  const [overlayOpacity, setOverlayOpacity] = useState(0)
+  // const [overlayDisplay, setOverlayDisplay] = useState("none")
   const [overlayDisplay, setOverlayDisplay] = useState("block")
 
+  // const [navDisplay, setNavDisplay] = useState("visible")
   const [navDisplay, setNavDisplay] = useState("none")
 
   const onScroll = e => {
@@ -115,7 +116,9 @@ const IndexPage = () => {
   }
 
   useLayoutEffect(() => {
-    window.addEventListener('scroll', onScroll);
+    // if (!isMobile) {
+      window.addEventListener("scroll", onScroll);
+    // }
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 

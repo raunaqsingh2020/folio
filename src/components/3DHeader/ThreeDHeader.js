@@ -7,6 +7,8 @@ import Scene1 from "./Scene1"
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useProgress, Html } from '@react-three/drei'
 
+import headerVid from '@images/headerVid.mp4';
+
 import {
   BrowserView,
   MobileView,
@@ -30,8 +32,20 @@ const SceneContainer = styled.div`
   height: 100vh;
   width: 100vw;
   position: absolute;
+  //top: 0;
   padding: 0;
   margin: 0;
+`
+
+const VideoContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  padding: 0;
+  margin: 0;
+  background: #0A0A0A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 function Loader() {
@@ -47,6 +61,11 @@ function Loader() {
 const ThreeDHeader = ({ sceneRef }) => (
   <>
     <MobileView>
+      {/* <VideoContainer>
+        <video autoPlay loop muted playsInline width="100%">
+            <source src={headerVid} type='video/mp4' />
+        </video>
+      </VideoContainer> */}
       <SceneContainer ref={sceneRef}>
         <Canvas camera={{ position: [0, 0, 5], fov: 70 }}>
           <color attach="background" args={['#0A0A0A']} />

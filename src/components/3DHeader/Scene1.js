@@ -158,8 +158,6 @@ function TitleCopies({ layers }) {
 
 function Scene() {
 
-  // console.log("scene active");
-
   const [cubeCamera, renderTarget] = useRenderTarget()
 
   const [matcapTexture] = useMatcapTexture('C8D1DC_575B62_818892_6E747B')
@@ -189,9 +187,10 @@ function Scene() {
     //camera.position.lerp(new THREE.Vector3(x, y, 5-scrollY.current/3), 1);
     camera.position.lerp(new THREE.Vector3(x, y, 5-winScroll/200), 1);
 
-    // console.log(
-    //   `winScroll : ${winScroll},\nposition.z : ${camera.position.z}`
-    // );
+    // console.log("PRINT")
+    // console.log(window.scrollY)
+    // console.log(winScroll)
+    // console.log(camera.position.z)
 
   };
 
@@ -200,7 +199,9 @@ function Scene() {
       window.addEventListener("wheel", scroll);
     }
     return () => {
-      window.removeEventListener("wheel", scroll);
+      // if (!isMobile) {
+        window.removeEventListener("wheel", scroll);
+      // }
     };
   }, [scroll, changed]);
   

@@ -35,7 +35,7 @@ const PageEnd = styled.h1`
 	justify-content: center;
 	position: relative;
   overflow: hidden;
-  font-size: max(2.8vw, 1.2rem);
+  font-size: max(2.4vw, 1.1rem);
   margin-top: min(23vw, 10rem);
   color: var(--text);
   background: transparent;
@@ -96,13 +96,11 @@ const Footer = () => {
   return (
       <>
         <PageEnd>You've Reached the End</PageEnd>
-        {/* <button onClick={scrollToTop} style={{ background: 'none', border: 'none', cursor: 'pointer' }}> */}
-        <BackToTopWrapper
+        {/* <BackToTopWrapper
           initial={{ x: '0' }}
           animate={{ x: '-85%' }}
           transition={{ duration: 16, ease: 'linear', repeat: Infinity, delay: 0 }}
           onClick={scrollToTop}
-          // style={{ x: shift }}
         >
           <BackToTopText>BACK TO THE TOP ▲</BackToTopText>
           <BackToTopText>BACK TO THE TOP ▲</BackToTopText>
@@ -114,8 +112,7 @@ const Footer = () => {
           <BackToTopText>BACK TO THE TOP ▲</BackToTopText>
           <BackToTopText>BACK TO THE TOP ▲</BackToTopText>
           <BackToTopText>BACK TO THE TOP ▲</BackToTopText>
-        </BackToTopWrapper>
-        {/* </button> */}
+        </BackToTopWrapper> */}
         <FooterWrapper>
           <FooterText>39.95210˚N, 75.19308˚W</FooterText>
           <FooterText>©2021</FooterText>
