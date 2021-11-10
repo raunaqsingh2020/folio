@@ -163,7 +163,7 @@ const AboutMe = () => {
             <InfoWrapper>
                 <Info> 
                   <Fade bottom cascade>
-                    Hi, I'm Raunaq...{'\n'}God's greatest gift to humanity. Truly, I am the best.{'\n'}Amazing. Incredible. Inspiring.
+                    Hi, I'm Raunaq...{'\n'}Sample text sample text sample text.{'\n'}Sample text sample text sample text.
                   </Fade>
                 </Info>
             </InfoWrapper>
